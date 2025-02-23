@@ -1,0 +1,54 @@
+<script src="./pwa.ts"></script>
+<div
+  id="pwa-toast"
+  role="alert"
+  aria-labelledby="toast-message"
+  class="fixed bottom-6 right-6 z-10 card bg-base-200 w-full max-w-xs shadow"
+>
+  <div class="card-body message">
+    <span id="toast-message"></span>
+  </div>
+  <div class="card-actions justify-end px-4 pb-4">
+    <button id="pwa-close" class="btn btn-link">
+      Cerrar
+    </button>
+    <button id="pwa-refresh" class="btn btn-primary">
+      Recargar
+    </button>
+  </div>
+</div>
+
+<style>
+#pwa-toast {
+  visibility: hidden;
+  /* position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 16px;
+  padding: 12px;
+  border: 1px solid #8885;
+  border-radius: 4px;
+  z-index: 1;
+  text-align: left;
+  box-shadow: 3px 4px 5px 0 #8885; */
+}
+#pwa-toast .message {
+  /* margin-bottom: 8px; */
+}
+#pwa-toast button {
+  /* border: 1px solid #8885;
+  outline: none;
+  margin-right: 5px;
+  border-radius: 2px;
+  padding: 3px 10px; */
+}
+#pwa-toast.show {
+  visibility: visible;
+}
+button#pwa-refresh {
+  display: none;
+}
+#pwa-toast.show.refresh button#pwa-refresh {
+  display: inline-block;
+}
+</style>

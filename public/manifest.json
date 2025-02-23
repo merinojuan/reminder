@@ -1,0 +1,37 @@
+{
+  "name": "Reminder",
+  "short_name": "Reminder",
+  "description": "En Reminder, guarda todas esas pequeñas pero importantes cosas que necesitas recordar para mañana, accesible desde cualquiera de tus dispositivos.",
+  "theme_color": "#282a36",
+  "background_color": "#282a36",
+  "display": "standalone",
+  "start_url": "/reminder/?source=pwa",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "desktop.png",
+      "sizes": "640x320",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Escritorio"
+    },
+    {
+      "src": "mobile.png",
+      "sizes": "320x320",
+      "type": "image/png",
+      "label": "Móvil"
+    }
+  ]
+}

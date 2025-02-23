@@ -1,11 +1,25 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '@layouts/Layout.astro';
+import Reminders from '@components/Reminders.vue';
+import SignedIn from '@components/SignedIn.vue';
+import SignedOut from '@components/SignedOut.vue';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Reminder"
+	description="En Reminder, guarda todas esas pequeñas pero importantes cosas que necesitas recordar para mañana, accesible desde cualquiera de tus dispositivos."
+>
+	<SignedOut client:load>
+		<div class="card bg-base-200 w-full max-w-xs shadow mx-auto mt-6">
+			<div class="card-body">
+				<h2 class="card-title">Inicia sesión...</h2>
+				<p>
+					Ve a las opciones de usuario para iniciar sesión y ver tus datos.
+				</p>
+			</div>
+		</div>
+	</SignedOut>
+	<SignedIn client:load>
+		<Reminders client:only />
+	</SignedIn>
 </Layout>

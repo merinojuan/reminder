@@ -1,22 +1,101 @@
+---
+import { THEME, isDarkThemeDefault } from "@src/constants";
+import Header from '@components/Header.astro';
+import "@styles/global.css";
+// @ts-ignore
+import { pwaInfo } from 'virtual:pwa-info';
+import ReloadPrompt from '../components/ReloadPrompt.astro';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+const { origin } = Astro.url;
+
+const basedOrigin = `${origin}${import.meta.env.BASE_URL}`;
+const socialsImage = `${basedOrigin}/socials.png`;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={isDarkThemeDefault ? THEME.DARK : THEME.LIGHT}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title}>
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content={socialsImage}>
+		<meta property="og:url" content={basedOrigin}>
+		<meta name="twitter:card" content="summary_large_image">
+		<meta property="og:description" content={description}>
+		<meta property="og:site_name" content="Samply Website">
+		<meta name="twitter:image:alt" content={title}>
+
+		<link rel="manifest" href=`${import.meta.env.BASE_URL}/manifest.json`>
+
+		<link rel="icon" type="image/svg+xml" href=`${import.meta.env.BASE_URL}/favicon.svg` />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 	</head>
-	<body>
-		<slot />
+	<body class="px-4">
+		<main class="max-w-5xl mx-auto">
+			<Header />
+			<slot />
+		</main>
+		<ReloadPrompt />
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+<script>
+	import { onAuthStateChanged } from 'firebase/auth';
+	import { auth } from '@fb/client';
+	import { user } from '@src/store.js';
+	import { THEME, isDarkThemeDefault } from '../constants';
+  import 'swiper/css';
+
+	onAuthStateChanged(auth, (u) => {
+		if (u) {
+			user.set(u);
+		} else {
+			user.set(null);
+		}
+	});
+
+	function toggleTheme() {
+		const html = document.querySelector('html');
+		const label = document.querySelector('label');
+	
+		const currentTheme = html?.getAttribute('data-theme');
+		if (currentTheme === THEME.LIGHT) {
+			html?.setAttribute('data-theme', THEME.DARK);
+			localStorage.setItem('theme', THEME.DARK);
+		} else {
+			html?.setAttribute('data-theme', THEME.LIGHT);
+			localStorage.setItem('theme', THEME.LIGHT);
+		}
+	
+		if (label?.classList.contains('swap-active')) label?.classList.remove('swap-active');
+		else label?.classList.add('swap-active');
 	}
-</style>
+
+	function goTop() {
+		window && window.scrollTo({ top: 0, behavior: 'smooth' });
+	}
+	
+	const storedTheme = localStorage.getItem('theme');
+	if (
+		(isDarkThemeDefault && storedTheme === THEME.LIGHT)
+		|| (!isDarkThemeDefault && storedTheme === THEME.DARK)
+	) {
+		toggleTheme();
+	}
+	const themeButton = document.getElementById('theme-button');
+	const goTopButton = document.getElementById('go-top-button');
+	
+	themeButton?.addEventListener('click', () => toggleTheme());
+	goTopButton?.addEventListener('click', () => goTop());
+	</script>
