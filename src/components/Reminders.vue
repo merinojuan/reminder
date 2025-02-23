@@ -92,20 +92,25 @@ const name = ref('');
 const link = ref('');
 const tags = ref('');
 
-const {
-	data: reminderUser,
-	pending: reminderUserPending,
-	// error: reminderUserError,
-	// promise: reminderUserPromise
-} = useDocument(doc(db, 'reminder', $user.value.uid));
-const {
-	data: reminders,
-	pending: remindersPending,
-	// error: remindersError,
-} = useCollection(query(collection(db, 'reminder', $user.value.uid, 'reminders'), orderBy('created', 'desc')));
+let reminderUser = ref({});
+let reminderUserPending = ref(true);
+let reminders = ref([]);
+let remindersPending = ref(true);
+
+user.subscribe(u => {
+	if (!u) return;
+
+	const reminderUserData = useDocument(doc(db, 'reminder', u.uid));
+	const remindersData = useCollection(query(collection(db, 'reminder', u.uid, 'reminders'), orderBy('created', 'desc')), { ssrKey: u.uid });
+
+	reminderUser = reminderUserData.data;
+	reminderUserPending = reminderUserData.pending;
+	reminders = remindersData.data;
+	remindersPending = remindersData.pending;
+});
 
 let filteredReminders = computed(() => {
-	if (!reminders.value) return null;
+	if (!reminders?.value) return [];
 	if (!$selectedTags.value.length) return reminders.value;
 
 	return reminders.value.filter(r => r.tags?.length && $selectedTags.value.every(rt => r.tags.includes(rt)));
@@ -123,7 +128,7 @@ function openAddReminderModal() {
 }
 
 async function addReminder() {
-	if (!name.value) return;
+	if (!name.value || !$user.value) return;
 
 	const tagsList = tags.value ? [...new Set(tags.value.split(',').map(t => t ? t.trim().toLowerCase() : null).filter(t => !!t))] : null;
 	const batch = writeBatch(db);
