@@ -6,7 +6,6 @@ import AstroPWA from '@vite-pwa/astro';
 
 import vue from '@astrojs/vue';
 
-// https://astro.build/config
 export default defineConfig({
   devToolbar: {
     enabled: false
@@ -21,7 +20,7 @@ export default defineConfig({
   integrations: [
     AstroPWA({
       mode: 'development',
-      base: '/reminder',
+      base: '/reminder/',
       includeAssets: ['favicon.svg'],
       manifest: false,
       workbox: {
