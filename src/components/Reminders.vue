@@ -13,9 +13,29 @@
 		<section class="mt-4">
 			<div v-for="reminder in filteredReminders" :key="reminder.id"
 				class="card rounded-sm bg-base-200 shadow-sm p-4 mb-4">
-				<div v-if="reminder.created" class="text-end pb-1">
-					<div class="badge badge-primary">
+				<div class="text-end pb-1">
+					<div v-if="reminder.created" class="badge badge-primary">
 						{{ getStringDate(reminder.created) }}
+					</div>
+					<div class="dropdown dropdown-end ms-3">
+						<div ref="dropdown-button" tabindex="0" role="button" class="btn btn-circle btn-soft btn-xs rounded-btn">
+							<svg class="w-6 h-6 fill-current" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+								<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 12h.01m6 0h.01m5.99 0h.01"/>
+							</svg>
+						</div>
+						<ul
+							tabindex="0"
+							class="menu dropdown-content bg-base-100 rounded-box w-32 mt-2 p-2 shadow"
+						>
+							<li @click="deleteReminder(reminder.id)">
+								<a class="btn btn-error btn-soft btn-sm">
+									<svg class="w-4 h-4 fill-current" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+									</svg>
+									<span>Eliminar</span>
+								</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 				<div>
@@ -28,9 +48,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="fixed bottom-0 left-0 bg-transparent w-full">
+			<div class="fixed bottom-0 left-0 bg-transparent w-full z-[1000]">
 				<div class="max-w-5xl mx-auto text-end p-4 pe-8">
-					<button id="go-top-button" class="btn btn-circle btn-lg me-3">
+					<button class="btn btn-soft btn-circle btn-lg me-3" @click="goTop">
 						<svg class="w-6 h-6 fill-current" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
 							height="24" fill="none" viewBox="0 0 24 24">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -81,7 +101,7 @@ import { user, selectedTags } from '@src/store';
 import { useStore } from '@nanostores/vue';
 import { ref, useTemplateRef, computed } from 'vue';
 import { useCollection, useDocument } from 'vuefire';
-import { collection, doc, writeBatch, query, orderBy } from 'firebase/firestore';
+import { collection, doc, writeBatch, query, orderBy, deleteDoc } from 'firebase/firestore';
 import { db } from '@fb/client';
 
 const $user = useStore(user);
@@ -123,6 +143,10 @@ function getStringDate(created) {
 	return `${date.toLocaleDateString()} ${date.getHours()}:${minutes}`;
 }
 
+function goTop() {
+	window && window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function openAddReminderModal() {
 	addReminderModal.value.showModal();
 }
@@ -159,4 +183,10 @@ async function addReminder() {
 	link.value = '';
 	tags.value = '';
 }
+
+async function deleteReminder(id) {
+	if (!$user.value) return;
+
+  await deleteDoc(doc(db, 'reminder', $user.value.uid, 'reminders', id));
+} 
 </script>
