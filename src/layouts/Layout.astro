@@ -42,7 +42,7 @@ const socialsImage = `${basedOrigin}/socials.png`;
 		{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 	</head>
 	<body class="px-4">
-		<main class="max-w-5xl mx-auto">
+		<main class="max-w-5xl mx-auto pb-16">
 			<Header />
 			<slot />
 		</main>
@@ -55,7 +55,6 @@ const socialsImage = `${basedOrigin}/socials.png`;
 	import { auth } from '@fb/client';
 	import { user } from '@src/store.js';
 	import { THEME, isDarkThemeDefault } from '../constants';
-  import 'swiper/css';
 
 	onAuthStateChanged(auth, (u) => {
 		if (u) {
@@ -67,7 +66,6 @@ const socialsImage = `${basedOrigin}/socials.png`;
 
 	function toggleTheme() {
 		const html = document.querySelector('html');
-		const label = document.querySelector('label');
 	
 		const currentTheme = html?.getAttribute('data-theme');
 		if (currentTheme === THEME.LIGHT) {
@@ -77,13 +75,6 @@ const socialsImage = `${basedOrigin}/socials.png`;
 			html?.setAttribute('data-theme', THEME.LIGHT);
 			localStorage.setItem('theme', THEME.LIGHT);
 		}
-	
-		if (label?.classList.contains('swap-active')) label?.classList.remove('swap-active');
-		else label?.classList.add('swap-active');
-	}
-
-	function goTop() {
-		window && window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 	
 	const storedTheme = localStorage.getItem('theme');
@@ -93,9 +84,7 @@ const socialsImage = `${basedOrigin}/socials.png`;
 	) {
 		toggleTheme();
 	}
-	const themeButton = document.getElementById('theme-button');
-	const goTopButton = document.getElementById('go-top-button');
+	const themeCheckbox = document.getElementById('theme-checkbox');
 	
-	themeButton?.addEventListener('click', () => toggleTheme());
-	goTopButton?.addEventListener('click', () => goTop());
+	themeCheckbox?.addEventListener('change', () => toggleTheme());
 	</script>
