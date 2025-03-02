@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@vite-pwa/astro": "^0.5.0",
-    "daisyui": "5.0.0-beta.7",
+    "daisyui": "5.0.0",
     "workbox-window": "^7.3.0"
   }
 }
