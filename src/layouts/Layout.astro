@@ -41,8 +41,8 @@ const socialsImage = `${basedOrigin}/socials.png`;
 		<title>{title}</title>
 		{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 	</head>
-	<body class="px-4">
-		<main class="max-w-5xl mx-auto pb-16">
+	<body>
+		<main class="max-w-5xl mx-auto px-4 pb-20">
 			<Header />
 			<slot />
 		</main>

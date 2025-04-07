@@ -8,12 +8,12 @@ const moonIconSwap = isDarkThemeDefault ? 'swap-on' : 'swap-off';
 ---
 
 <header class="sticky top-4 z-10 mt-4">
-  <nav class="navbar rounded-sm bg-base-200 shadow-sm">
+  <nav class="card navbar flex-row bg-base-300/40 backdrop-blur-md">
     <div class="flex-1">
       <Logotipo class="h-6" />
     </div>
-    <div class="flex-none">
-      <label id="theme-button" role="button" class="btn btn-circle btn-ghost swap swap-rotate">
+    <div class="flex gap-2">
+      <label id="theme-button" role="button" class="btn btn-circle btn-soft swap swap-rotate">
         <input id="theme-checkbox" type="checkbox" class="theme-controller" aria-label="Cambiar tema" />
         <!-- sun icon -->
         <svg class={sunIconSwap} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">

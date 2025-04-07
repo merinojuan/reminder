@@ -22,14 +22,14 @@
 			<div v-else>
 				<div
 					v-for="reminder in filteredReminders" :key="reminder.id"
-					class="card rounded-sm bg-base-200 shadow-sm p-4 mb-4"
+					class="card bg-base-200 shadow p-4 mb-4"
 				>
 					<div class="text-end pb-1">
 						<!-- <div v-if="reminder.created" class="badge badge-primary">
 							{{ getStringDate(reminder.created) }}
 						</div> -->
 						<div class="dropdown dropdown-end ms-3">
-							<div ref="dropdown-button" class="btn btn-circle btn-soft btn-xs rounded-btn" tabindex="0" role="button" aria-label="Abrir opciones del recordatorio">
+							<div ref="dropdown-button" class="btn btn-circle btn-soft btn-xs" tabindex="0" role="button" aria-label="Abrir opciones del recordatorio">
 								<svg class="w-6 h-6 fill-current" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
 									<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 12h.01m6 0h.01m5.99 0h.01"/>
 								</svg>
@@ -74,21 +74,40 @@
 					</div>
 				</div>
 			</div>
-			<div class="fixed bottom-0 left-0 bg-transparent w-full z-[1000]">
-				<div class="max-w-5xl mx-auto text-end p-4 pe-8">
-					<button class="btn btn-soft btn-circle btn-lg me-3" aria-label="Volver al principio" @click="goTop">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M6 15l6 -6l6 6" />
-						</svg>
-					</button>
-					<button class="btn btn-primary btn-circle btn-lg" aria-label="Agregar recordatorio" @click="openAddOrUpdateReminderModal(null)">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M12 5l0 14" />
-							<path d="M5 12l14 0" />
-						</svg>
-					</button>
+			<div class="fixed bottom-0 left-0 w-full z-[1000]">
+				<div class="max-w-5xl mx-auto p-4">
+					<div class="card navbar flex-row bg-base-300/40 backdrop-blur-md justify-end gap-2">
+						<button class="btn btn-soft btn-circle" aria-label="Volver al principio" @click="goTop">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M6 15l6 -6l6 6" />
+							</svg>
+						</button>
+						<button class="btn btn-primary btn-circle" aria-label="Agregar recordatorio" @click="openAddOrUpdateReminderModal(null)">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 5l0 14" />
+								<path d="M5 12l14 0" />
+							</svg>
+						</button>
+					</div>
 				</div>
 			</div>
+			<!-- <div class="fixed bottom-0 left-0 w-full z-[1000] bg-base-300/40 backdrop-blur-md lg:bg-transparent lg:backdrop-blur-none">
+				<div class="max-w-5xl mx-auto flex justify-end p-4">
+					<div class="flex gap-2 lg:card lg:flex-row lg:bg-base-300/40 lg:backdrop-blur-md lg:p-2">
+						<button class="btn btn-soft btn-circle" aria-label="Volver al principio" @click="goTop">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M6 15l6 -6l6 6" />
+							</svg>
+						</button>
+						<button class="btn btn-primary btn-circle" aria-label="Agregar recordatorio" @click="openAddOrUpdateReminderModal(null)">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 5l0 14" />
+								<path d="M5 12l14 0" />
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div> -->
 			<dialog ref="add-or-update-reminder-modal" class="modal modal-bottom sm:modal-middle">
 				<div class="modal-box">
 					<form method="dialog">

@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown dropdown-end">
-    <div ref="dropdown-button" class="btn btn-circle btn-ghost rounded-btn" tabindex="0" role="button" aria-label="Abrir opciones de usuario">
+    <div ref="dropdown-button" class="btn btn-circle btn-soft" tabindex="0" role="button" aria-label="Abrir opciones de usuario">
       <div v-if="$user?.photoURL" class="avatar">
         <div class="w-6 rounded-full">
           <img :src="$user.photoURL" />
