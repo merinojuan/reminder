@@ -1,7 +1,7 @@
 {
   "name": "Reminder",
   "short_name": "Reminder",
-  "description": "En Reminder, guarda todas esas pequeñas pero importantes cosas que necesitas recordar para mañana, accesible desde cualquiera de tus dispositivos.",
+  "description": "En Reminder guarda todas esas pequeñas pero importantes cosas que necesitas recordar para mañana, accesible desde cualquiera de tus dispositivos.",
   "theme_color": "#282a36",
   "background_color": "#282a36",
   "display": "standalone",
