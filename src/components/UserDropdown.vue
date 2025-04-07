@@ -1,12 +1,12 @@
 <template>
   <div class="dropdown dropdown-end">
     <div ref="dropdown-button" class="btn btn-circle btn-ghost rounded-btn" tabindex="0" role="button" aria-label="Abrir opciones de usuario">
-      <!-- <div v-if="$user?.photoURL" class="avatar">
-        <div class="w-10 rounded-full">
+      <div v-if="$user?.photoURL" class="avatar">
+        <div class="w-6 rounded-full">
           <img :src="$user.photoURL" />
         </div>
-      </div> -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" >
+      </div>
+      <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" >
         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
       </svg>
