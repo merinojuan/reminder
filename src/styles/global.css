@@ -18,3 +18,7 @@
 ::-webkit-scrollbar-thumb {
 	background-color: var(--color-base-200);
 }
+
+.swiper-slide__w-auto {
+  width: auto !important;
+}

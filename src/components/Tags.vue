@@ -1,29 +1,41 @@
 <template>
   <section
     v-if="tags?.length"
-    class="flex gap-3 overflow-x-auto mt-3 py-4"
+    class="flex items-center gap-2 mt-3 py-4"
   >
-		<button class="btn btn-soft btn-circle btn-sm" aria-label="Editar etiquetas" @click="openUpdateTagsModal">
-			<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-				<path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
-				<path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
-				<path d="M16 5l3 3" />
-			</svg>
-		</button>
-		<div
-      v-for="(tag, index) in tags"
-      :key="index"
-			class="shrink-0"
-		>
-			<button
-				class="btn btn-sm btn-soft"
-        aria-label="Filtrar recordatorios por etiqueta"
-        :class="{ 'btn-primary': $selectedTags.includes(tag) }"
-        @click="toggleTag(tag)"
-      >
-        {{ tag }}
+    <div>
+      <button class="btn btn-soft btn-circle btn-sm" aria-label="Editar etiquetas" @click="openUpdateTagsModal">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+          <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+          <path d="M16 5l3 3" />
+        </svg>
       </button>
-		</div>
+    </div>
+    <div class="overflow-auto">
+      <swiper
+        :slidesPerView="'auto'"
+        :spaceBetween="0"
+      >
+        <swiper-slide
+          v-for="(tag, index) in tags"
+          :key="index"
+          class="swiper-slide__w-auto"
+        >
+          <div class="pe-2">
+            <div
+              role="button"
+              class="btn btn-sm btn-soft"
+              aria-label="Filtrar recordatorios por etiqueta"
+              :class="{ 'btn-primary': $selectedTags.includes(tag) }"
+              @click="toggleTag(tag)"
+            >
+              {{ tag }}
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
   </section>
   <dialog ref="update-tags-modal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
@@ -61,6 +73,8 @@
   import { useStore } from '@nanostores/vue';
   import { user, selectedTags } from '@src/store';
   import { db } from '@fb/client';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import 'swiper/css';
 
   const $user = useStore(user);
   const $selectedTags = useStore(selectedTags);
