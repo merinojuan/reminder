@@ -6,7 +6,7 @@
   "background_color": "#282a36",
   "display": "standalone",
   "start_url": "/reminder/?source=pwa",
-  "scope": "/",
+  "scope": "/reminder/",
   "icons": [
     {
       "src": "192.png",

@@ -21,6 +21,7 @@ export default defineConfig({
     AstroPWA({
       mode: 'development',
       base: '/reminder/',
+      scope: '/reminder/',
       includeAssets: ['favicon.svg'],
       manifest: false,
       workbox: {
