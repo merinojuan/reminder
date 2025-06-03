@@ -58,7 +58,7 @@ const socialsImage = `${basedOrigin}/socials.png`;
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '@fb/client';
 	import { user } from '@src/store.js';
-	import { THEME, isDarkThemeDefault } from '../constants';
+	// import { THEME, isDarkThemeDefault } from '../constants';
 
 	onAuthStateChanged(auth, (u) => {
 		if (u) {
@@ -68,27 +68,27 @@ const socialsImage = `${basedOrigin}/socials.png`;
 		}
 	});
 
-	function toggleTheme() {
-		const html = document.querySelector('html');
+	// function toggleTheme() {
+	// 	const html = document.querySelector('html');
 	
-		const currentTheme = html?.getAttribute('data-theme');
-		if (currentTheme === THEME.LIGHT) {
-			html?.setAttribute('data-theme', THEME.DARK);
-			localStorage.setItem('theme', THEME.DARK);
-		} else {
-			html?.setAttribute('data-theme', THEME.LIGHT);
-			localStorage.setItem('theme', THEME.LIGHT);
-		}
-	}
+	// 	const currentTheme = html?.getAttribute('data-theme');
+	// 	if (currentTheme === THEME.LIGHT) {
+	// 		html?.setAttribute('data-theme', THEME.DARK);
+	// 		localStorage.setItem('theme', THEME.DARK);
+	// 	} else {
+	// 		html?.setAttribute('data-theme', THEME.LIGHT);
+	// 		localStorage.setItem('theme', THEME.LIGHT);
+	// 	}
+	// }
 	
-	const storedTheme = localStorage.getItem('theme');
-	if (
-		(isDarkThemeDefault && storedTheme === THEME.LIGHT)
-		|| (!isDarkThemeDefault && storedTheme === THEME.DARK)
-	) {
-		toggleTheme();
-	}
-	const themeCheckbox = document.getElementById('theme-checkbox');
+	// const storedTheme = localStorage.getItem('theme');
+	// if (
+	// 	(isDarkThemeDefault && storedTheme === THEME.LIGHT)
+	// 	|| (!isDarkThemeDefault && storedTheme === THEME.DARK)
+	// ) {
+	// 	toggleTheme();
+	// }
+	// const themeCheckbox = document.getElementById('theme-checkbox');
 	
-	themeCheckbox?.addEventListener('change', () => toggleTheme());
-	</script>
+	// themeCheckbox?.addEventListener('change', () => toggleTheme());
+</script>

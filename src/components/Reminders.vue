@@ -75,8 +75,8 @@
 				</div>
 			</div>
 			<div class="fixed bottom-0 left-0 w-full z-[1000]">
-				<div class="max-w-5xl mx-auto p-4">
-					<div class="card navbar flex-row bg-base-300/40 backdrop-blur-md justify-end gap-2">
+				<div class="max-w-5xl mx-auto p-4 pb-0">
+					<div class="card navbar rounded-b-none flex-row bg-base-300/40 backdrop-blur-md justify-end gap-2">
 						<button class="btn btn-soft btn-circle" aria-label="Volver al principio" @click="goTop">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
 								<path d="M6 15l6 -6l6 6" />
